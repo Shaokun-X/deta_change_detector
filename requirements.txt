@@ -1,0 +1,7 @@
+deta
+fastapi
+uvicorn
+requests
+lxml
+jinja2
+fake-useragent

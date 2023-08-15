@@ -1,0 +1,19 @@
+<td>{{item.key}}</td>
+<td><input type="text" name="name" value="{{item.name}}" data-key="{{item.key}}" aria-labelledby="name"></td>
+<td><input type="text" name="url" value="{{item.url}}" data-key="{{item.key}}" aria-labelledby="URL"></td>
+<td><input type="text" name="xpath" value="{{item.xpath}}" data-key="{{item.key}}" aria-labelledby="XPath"></td>
+{% if item.values %}
+    <td>{{(item.values | latest_update_time).strftime('%d %B %Y %H:%M:%S %Z')}}</td>
+    {% with value=(item.values | latest_value) %}
+    {% if value is none  %}
+        <td> <strong><em>FAILED</em></strong> </td>
+    {% else %}
+        <td>{{value}}</td>
+    {% endif %}
+    {% endwith %}
+{% else %}
+    <td></td><td></td>
+{% endif %}
+<td>
+        <button hx-put="/{{item.key}}" hx-include="input[data-key='{{item.key}}']" hx-ext='json-enc' hx-target="closest tr" hx-swap="innerHTML">Confirm</button>
+</td>

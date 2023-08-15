@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="icon" href="data:,">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Change Detector</title>
+</head>
+
+<body>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    *+* {
+      margin: .5em 0;
+    }
+
+    section+section {
+      margin: 3em 0;
+    }
+
+    .row,
+    .w-100 {
+      width: 100%;
+    }
+
+    .btn:hover,
+    a:hover {
+      opacity: .6;
+    }
+
+    .c {
+      max-width: 60em;
+      padding: 1em;
+      margin: auto;
+      font: 1em/1.6;
+    }
+
+    table {
+      word-break: break-word;
+    }
+    th {
+      word-break: keep-all;
+    }
+
+    td,
+    th {
+      padding: 0.2em;
+      text-align: left;
+      border-bottom: 1px solid #000;
+    }
+
+    html {
+      font-family: consolas, monaco, courier, "courier new", monospace;
+    }
+
+  </style>
+
+
+  <main class="c">
+    <section id="header">
+      <h1>Change Detector</h1>
+    </section>
+    <section id="new">
+      <form hx-post="/" hx-ext='json-enc' hx-target="tbody" hx-swap="innerHTML">
+        <fieldset>
+          <legend><strong>Add a new watch</strong></legend>
+          <label for="name">Name</label>
+          <input type="text" name="name" id="name">
+          <label for="url">URL</label>
+          <input type="text" name="url" id="url">
+          <label for="xpath">XPath</label>
+          <input type="text" name="xpath" id="xpath">
+          <input type="submit" value="Add">
+        </fieldset>
+      </form>
+    </section>
+    <section id="list">
+      <table class="w-100">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>URL</th>
+                <th>XPath</th>
+                <th>Last Updated</th>
+                <th>Current Value</th>
+                <th>Operations</th>
+            </tr>
+        </thead>
+        {# TODO polling has conflict with edit #}
+        {# <tbody hx-get="/list" hx-trigger="every 1.5s " hx-target="this" hx-swap="innerHTML"> #}
+        <tbody>
+        {% include "_list.jinja" %}
+        </tbody>
+    </table>
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/htmx.org@1.9.4"
+    integrity="sha384-zUfuhFKKZCbHTY6aRR46gxiqszMk5tcHjsVFxnUo8VMus4kHGVdIYVbOYYNlKmHV"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
+</body>
+
+</html>
