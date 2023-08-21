@@ -18,4 +18,4 @@ def actions(action: Action):
     if action.event.id == "scrape":
         watches = fetch_all_watches()
         for watch in watches:
-            execute_watch(watch)
+            execute_watch(watch, notify=True)

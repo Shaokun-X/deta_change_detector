@@ -14,3 +14,11 @@ micros:
         description: "Scrape data for all watches"
         trigger: "schedule"
         default_interval: "* * * * *"
+    presets:
+      env:
+        - name: NOTIFICATION_EMAIL
+          description: Email to receive email notifications. See ntfy.sh for more information.
+          default: "email@example.com"
+        - name: NTFY_TOPIC
+          description: The topic to which the notification will be published. See ntfy.sh for more information.
+          default: "IAmWatching"

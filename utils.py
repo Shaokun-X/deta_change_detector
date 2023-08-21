@@ -1,6 +1,7 @@
 from datetime import datetime
 from model import db, Watch
 from scrape import scrape
+from notification import notify as send_notification
 
 
 def fetch_all_watches() -> list[Watch]:
@@ -20,6 +21,6 @@ def execute_watch(watch: Watch, notify=False):
         "updated_time": datetime.utcnow().timestamp()
     }, watch.key)
 
+    # if value changes
     if notify and len(watch.values) >= 2 and watch.values[-1][1] != watch.values[-2][1]:
-        # TODO implement notification
-        pass
+        send_notification(watch.values[-2][1], watch.values[-1][1], watch.url, watch.name)
