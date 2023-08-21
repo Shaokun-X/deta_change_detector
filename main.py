@@ -49,7 +49,7 @@ def create(request: Request, data: WatchForm):
     items = fetch_all_watches()
     return templates.TemplateResponse("_list.jinja", {"request": request, "items": items})
 
-@app.get("/{key}")
+@app.post("/{key}")
 def check(request: Request, key: str):
     result = db.get(key)
     if result:
