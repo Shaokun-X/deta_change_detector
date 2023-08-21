@@ -15,6 +15,9 @@
     <td></td><td></td>
 {% endif %}
 <td>
+    <a href="/{{item.key}}" class="button-link">
+    <button>Detail</button>
+    </a>
     <button hx-post="/{{item.key}}" hx-target="closest tr" hx-swap="innerHTML">Check</button>
     <button hx-get="/edit/{{item.key}}" hx-target="closest tr" hx-swap="innerHTML">Edit</button>
     <button hx-delete="/{{item.key}}" hx-confirm='Are you sure you want to delete "{{item.name}}" ({{item.key}})?' hx-target="closest tr" hx-swap="outerHTML">Delete</button>

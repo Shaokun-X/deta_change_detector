@@ -13,7 +13,7 @@ micros:
         name: "Scrape"
         description: "Scrape data for all watches"
         trigger: "schedule"
-        default_interval: "* * * * *"
+        default_interval: "*/20 * * * *"
     presets:
       env:
         - name: NOTIFICATION_EMAIL

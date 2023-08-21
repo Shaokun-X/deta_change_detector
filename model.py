@@ -13,6 +13,7 @@ class WatchForm(BaseModel):
 class Watch(WatchForm):
     key: Optional[str]
     created_time: float
+    # last triggered time
     updated_time: float
     # each element is (timestamp, value) tuple
     values: list[tuple[float, Optional[str]]]

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="icon" href="data:,">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Change Detector</title>
+</head>
+
+<body>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    section+section {
+      margin: 3em 0;
+    }
+
+    .row,
+    .w-100 {
+      width: 100%;
+    }
+
+    .btn:hover,
+    a:hover {
+      opacity: .6;
+    }
+
+    .c {
+      max-width: 60em;
+      padding: 1em;
+      margin: auto;
+      font: 1em/1.6;
+    }
+
+    table {
+      word-break: break-word;
+    }
+    th {
+      word-break: keep-all;
+    }
+
+    td,
+    th {
+      padding: 0.2em;
+      text-align: left;
+      border-bottom: 1px solid #000;
+    }
+
+    html {
+      font-family: consolas, monaco, courier, "courier new", monospace;
+    }
+
+    .button-link {
+      text-decoration: none;
+    }
+
+  </style>
+
+
+  <main class="c">
+    <section id="header">
+      <h1>Change Detector</h1>
+      <a href="/">
+        <button>Go Back</button>
+      </a>
+    </section>
+    <section id="info">
+      <p><strong>Name: </strong>{{ item.name }}</p>
+      <p><strong>URL: </strong>{{ item.url }}</p>
+      <p><strong>XPath: </strong>{{ item.xpath }}</p>
+      <p><strong>Created At: </strong>{{ (item.created_time | timestamp_to_datetime).strftime('%d %B %Y %H:%M:%S %Z') }}</p>
+      <p><strong>Triggered At: </strong>{{ (item.updated_time | timestamp_to_datetime).strftime('%d %B %Y %H:%M:%S %Z') }}</p>
+    </section>
+    <section id="list">
+      <table class="w-100">
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+          {% for timestamp, value in item.values | reverse %}
+          <tr>
+              <td>{{ (timestamp | timestamp_to_datetime).strftime('%d %B %Y %H:%M:%S %Z') }}</td>
+              <td>{{ value }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+    </section>
+  </main>
+
+</body>
+
+</html>
